@@ -26,6 +26,7 @@ DEFINE CLASS form1 AS form
 	*< OBJECTDATA: ObjPath="Label1" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="Command1" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="Image1" UniqueID="" Timestamp="" />
+	*< OBJECTDATA: ObjPath="Command2" UniqueID="" Timestamp="" />
 
 	*<PropValue>
 		BackColor = 255,255,255
@@ -44,6 +45,15 @@ DEFINE CLASS form1 AS form
 		Left = 396, ;
 		Name = "Command1", ;
 		Top = 288, ;
+		Width = 145
+		*< END OBJECT: BaseClass="commandbutton" />
+
+	ADD OBJECT 'Command2' AS commandbutton WITH ;
+		Caption = "Mensaje", ;
+		Height = 37, ;
+		Left = 84, ;
+		Name = "Command2", ;
+		Top = 192, ;
 		Width = 145
 		*< END OBJECT: BaseClass="commandbutton" />
 
@@ -72,5 +82,21 @@ DEFINE CLASS form1 AS form
 		Top = 12, ;
 		Width = 176
 		*< END OBJECT: BaseClass="label" />
+	
+	PROCEDURE Command1.Click
+		oHttp = CREATEOBJECT("WinHttp.WinHttpRequest.5.1")
+		oHttp.Open("GET", "https://ph.easybizy.mx/index.php/link", .F.)
+		oHttp.Send()
+		lcResponseText  = "" + oHttp.ResponseText
+		
+		
+		thisForm.label1.Caption = lcResponseText
+	ENDPROC
+
+	PROCEDURE Command2.Click
+		MESSAGEBOX("prueba del  boton")
+		
+		
+	ENDPROC
 
 ENDDEFINE
