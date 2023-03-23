@@ -72,5 +72,15 @@ DEFINE CLASS form1 AS form
 		Top = 12, ;
 		Width = 176
 		*< END OBJECT: BaseClass="label" />
+	
+	PROCEDURE Command1.Click
+		oHttp = CREATEOBJECT("WinHttp.WinHttpRequest.5.1")
+		oHttp.Open("GET", "https://ph.easybizy.mx/index.php/link", .F.)
+		oHttp.Send()
+		lcResponseText  = "" + oHttp.ResponseText
+		
+		
+		thisForm.label1.Caption = lcResponseText
+	ENDPROC
 
 ENDDEFINE
